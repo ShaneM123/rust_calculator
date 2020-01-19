@@ -1,4 +1,5 @@
 use std::io::{stdin, stdout, Write};
+use std::num::ParseIntError;
 
 pub fn pause() -> String {
     let mut x = String::new();
@@ -10,6 +11,39 @@ pub fn pause() -> String {
 }
 
 pub fn string_iterator(s: String)-> i32 {
+    let mut numbers:Vec<Result<u32,ParseIntError>> = Vec::new();
+    let mut signs = Vec::new();
+    let mut x = 0;
+    let mut l=0;
+
+    for t in s.chars(){
+        if t.is_alphabetic(){
+            l +=1;
+            signs.push(t);
+            if l ==2{
+                if signs.get(0).unwrap()==&'+'{
+                   for o in &numbers{
+                       match o{
+                           Ok(a) => x +=*a,
+                           _=> {}
+                       }
+                   }
+
+                }
+            }
+
+        }
+        if t.is_numeric(){
+           let m=  t.to_digit(10).unwrap();
+            numbers.push(Ok(m))
+        }
+
+    }
+    return x as i32
+}
+
+
+/*pub fn int_iterator(s: String)-> i32 {
     let mut x:i32=0;
     let  parts = s.split_whitespace().map(|s| s.parse::<i32>());
     for b in parts {match b {
@@ -18,7 +52,7 @@ pub fn string_iterator(s: String)-> i32 {
         }
         _ => {}
     }}
-    /*
+    *//*
     match parts.next() {
         Some(Ok(a))=> { x+=a;
 // a and b are i32
@@ -26,9 +60,9 @@ pub fn string_iterator(s: String)-> i32 {
 // handle other problems: not enough numbers, numbers are invalid, etc
         _ => {}  // ignore invalid input
 
-    }*/
+    }*//*
     return x
-}
+}*/
 
 #[cfg(test)]
 mod tests {

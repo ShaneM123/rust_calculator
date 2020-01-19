@@ -1,6 +1,6 @@
 mod lib;
 use lib::pause;
-use lib::string_iterator;
+use crate::lib::string_iterator;
 
 fn main() {
    let x = pause();
