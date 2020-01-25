@@ -15,9 +15,17 @@ pub fn string_iterator(s: String)-> i32 {
     let mut signs = Vec::new();
     let mut x = 0;
     let mut l=0;
+    let mut m :u32=0;
+    let mut acc = String::new();
 
     for t in s.chars(){
-        if t.is_alphabetic(){
+        if  t.is_numeric() {
+            println!("T={:?}", t);
+            m = t.to_digit(10).unwrap();
+            println!("M={:?}", m);
+        }
+        if !t.is_numeric(){
+            numbers.push(Ok(m));
             l +=1;
             signs.push(t);
             if l ==2{
@@ -33,11 +41,6 @@ pub fn string_iterator(s: String)-> i32 {
             }
 
         }
-        if t.is_numeric(){
-           let m=  t.to_digit(10).unwrap();
-            numbers.push(Ok(m))
-        }
-
     }
     return x as i32
 }
