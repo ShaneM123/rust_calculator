@@ -16,7 +16,7 @@ pub fn string_iterator(s: String)-> i32 {
     let mut x = 0;
     let mut l=0;
     let mut m :u32=0;
-    let mut acc = String::new();
+  //  let mut acc = String::new();
 
     for t in s.chars(){
         if  t.is_numeric() {
@@ -44,8 +44,9 @@ pub fn string_iterator(s: String)-> i32 {
     }
     return x as i32
 }
-
-
+     pub fn stripper(x: String) -> String {
+        x.replace(" ", "")
+}
 /*pub fn int_iterator(s: String)-> i32 {
     let mut x:i32=0;
     let  parts = s.split_whitespace().map(|s| s.parse::<i32>());
