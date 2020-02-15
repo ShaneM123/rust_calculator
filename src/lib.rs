@@ -1,5 +1,4 @@
 use std::io::{stdin, stdout, Write};
-use std::num::ParseIntError;
 
 pub fn pause() -> String {
     let mut x = String::new();
@@ -11,62 +10,48 @@ pub fn pause() -> String {
 }
 
 pub fn string_iterator(s: String)-> i32 {
-    let mut numbers:Vec<Result<u32,ParseIntError>> = Vec::new();
-    let mut signs = Vec::new();
-    let mut x = 0;
-    let mut l=0;
-    let mut m :u32=0;
-  //  let mut acc = String::new();
+    let  x =0;
+    let mut i = 0;
+    let mut val2 = 0;
 
-    for t in s.chars(){
-        if  t.is_numeric() {
-            println!("T={:?}", t);
-            m = t.to_digit(10).unwrap();
-            println!("M={:?}", m);
+    let calculation=to_array(s);
+
+    for y in &calculation{
+        println!("Y={:?}", y);
+        if y.as_str() == "x"{
+            println!("matched on multiply= {:?}",  calculation.get(i));
+            //let mut val1  = calculation.get(i-1)?.parse::<i32>();
+             val2 = calculation.get(i-1).unwrap().parse::<i32>().unwrap() * calculation.get(i+1).unwrap().parse::<i32>().unwrap();
         }
-        if !t.is_numeric(){
-            numbers.push(Ok(m));
-            l +=1;
-            signs.push(t);
-            if l ==2{
-                if signs.get(0).unwrap()==&'+'{
-                   for o in &numbers{
-                       match o{
-                           Ok(a) => x +=*a,
-                           _=> {}
-                       }
-                   }
-
-                }
-            }
-
-        }
+        i = i+1;
     }
+    println!("VAL2 ={:?}", val2);
     return x as i32
 }
      pub fn stripper(x: String) -> String {
         x.replace(" ", "")
 }
-/*pub fn int_iterator(s: String)-> i32 {
-    let mut x:i32=0;
-    let  parts = s.split_whitespace().map(|s| s.parse::<i32>());
-    for b in parts {match b {
-        Ok(a)=> {
-            x += a;
-        }
-        _ => {}
-    }}
-    *//*
-    match parts.next() {
-        Some(Ok(a))=> { x+=a;
-// a and b are i32
-        }
-// handle other problems: not enough numbers, numbers are invalid, etc
-        _ => {}  // ignore invalid input
 
-    }*//*
-    return x
-}*/
+pub fn to_array(s: String) -> Vec<String> {
+    let mut calculation = Vec::with_capacity(s.len());
+    let mut acc = String::new();
+
+    for t in s.chars() {
+        if t.is_numeric() {
+        acc.push(t);
+        println!("ACC num={:?}", acc);
+        println!("T={:?}", t);
+}
+        if !t.is_numeric() {
+         calculation.push(acc.clone());
+         acc.clear();
+         calculation.push(t.to_string());
+}
+}
+    calculation.push(acc.clone());
+    return calculation;
+}
+
 
 #[cfg(test)]
 mod tests {
