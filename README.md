@@ -5,3 +5,7 @@ A work in progress
 this program can multiply two numbers together using the syntax 'Value1''x'Value2'
 eg entering: 5x10
 will return: 50
+
+
+
+There are currenbtly two branches. Master and Dev.
