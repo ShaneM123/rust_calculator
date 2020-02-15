@@ -1,16 +1,13 @@
-use std::io::{stdin, stdout, Write};
-
-fn pause()->String{
-    let mut x = String::new();
-    let mut stdout = stdout();
-    stdout.write(b"Welcome User, please enter a number").unwrap();
-    stdout.flush().unwrap();
-    stdin().read_line(&mut x).expect("error, something went wrong reading input");
-    x.trim().to_string()
-}
+mod lib;
+use lib::pause;
+use lib::stripper;
+use crate::lib::string_iterator;
 
 fn main() {
-   let x = pause();
+   let x = stripper(pause().trim().to_string());
     println!("Thank you for your participation");
     println!("{:?}", x );
+    let y = string_iterator(x);
+    println!("{:?}", y);
+
 }
